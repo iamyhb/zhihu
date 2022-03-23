@@ -19,7 +19,6 @@ const install = (app: any) => {
     if (key === 'CRow' || key === 'CCol') {
       app.component(key, components[key])
     } else {
-      console.log(components[key])
       app.component(components[key].name, components[key])
     }
   })

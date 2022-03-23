@@ -1,5 +1,5 @@
 <template>
-  <div class="c-single-center" :class="{ 'c-single-center--horizontal': vertical }">
+  <div class="c-single-center" :class="{ 'c-single-center--vertical': vertical }">
     <slot></slot>
   </div>
 </template>
@@ -21,7 +21,7 @@ withDefaults(defineProps<Props>(), {
 <style scoped lang="scss">
 @include b(c-single-center) {
   @include grid($align-items: center);
-  @include m(horizontal) {
+  @include m(vertical) {
     flex-direction: column;
   }
 }

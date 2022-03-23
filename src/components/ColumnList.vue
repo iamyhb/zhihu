@@ -1,6 +1,6 @@
 <template>
   <c-row class="c-row">
-    <c-col v-for="column in list" :key="column.id" span="8">
+    <c-col v-for="column in columnList" :key="column.id" span="8">
       <c-single-center class="c-single-center" vertical radius5 ma15>
         <img class="c-single-center__img" :src="column.avatar" :alt="column.title" circle mt30 mb10 />
         <p class="c-single-center__title" fz22 mv5>{{ column.title }}</p>
@@ -9,21 +9,33 @@
       </c-single-center>
     </c-col>
   </c-row>
+  <div class="abc"></div>
 </template>
 
 <script setup lang="ts">
 import CSingleCenter from './layout/MySingleCenter.vue'
 import CBoxCenter from './layout/MyBoxCenter.vue'
+import columnImgUrl from '@/assets/column.png'
+import { computed } from 'vue'
 
 export interface ColumnProps {
   id: number
   title: string
-  avatar: string
+  avatar?: string
   description: string
 }
-defineProps<{
+const props = defineProps<{
   list: Array<ColumnProps>
 }>()
+
+const columnList = computed(() => {
+  return props.list.map((column) => {
+    if (!column.avatar) {
+      column.avatar = columnImgUrl
+    }
+    return column
+  })
+})
 </script>
 
 <style scoped lang="scss">
@@ -49,5 +61,7 @@ defineProps<{
 @include b(c-row) {
   padding-left: 300px;
   padding-right: 300px;
+}
+@include b(abc) {
 }
 </style>
